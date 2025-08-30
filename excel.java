@@ -44,7 +44,8 @@ public class excel {
 			Row r =sheet.getRow(0);
 			Cell cell = r.getCell(0);
 			System.out.println("xcel : " + cell.getStringCellValue());
-		System.out.println(" looking for code to merge");
+		System.out.println(" looking for to merge");
+		
 		}
 	}
 	// hello i'm trying to push subbrnahc
