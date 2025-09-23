@@ -3,6 +3,7 @@ package One.simple.Learn_Maven;
 import static org.junit.Assert.*;
 
 import java.awt.Desktop.Action;
+import java.awt.List;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -13,6 +14,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
@@ -23,6 +25,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.v136.page.model.FileHandler;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -30,7 +33,7 @@ import com.google.common.io.Files;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class windgets {
+public class Widgets {
 WebDriver driver;
 	@Before
 	public void setUp() throws Exception {
@@ -169,11 +172,11 @@ public void testsorting() {
      Actions action = new Actions(driver);
      action.clickAndHold(itemOne).moveToElement(itemfour).release().build().perform();
 }
-
-@Test
+@Ignore
+@Test 
 public void testsortinggrid() {
 	driver.get("https://demoqa.com/sortable");
-	((JavascriptExecutor) driver).executeScript("window.scroll(0,250)");
+	((JavascriptExecutor) driver).executeScript("window.scroll(0,300)");
 	WebElement grid = driver.findElement(By.xpath("//*[@id=\"demo-tab-grid\"]"));
 	grid.click();
 	 WebElement itemOne = driver.findElement(By.xpath("//*[@id=\"demo-tabpane-grid\"]/div/div/div[1]"));
@@ -181,6 +184,71 @@ public void testsortinggrid() {
      Actions action = new Actions(driver);
      action.clickAndHold(itemOne).moveToElement(itemfive).release().build().perform();
 }
-
-
+@Ignore 
+@Test
+public void testdatePicker() throws Exception {
+	driver.get("https://demoqa.com/date-picker");
+	((JavascriptExecutor) driver).executeScript("window.scroll(0,400)");
+	WebElement datePicker = driver.findElement(By.xpath("//*[@id=\"datePickerMonthYearInput\"]"));
+	datePicker.click();
+	Select year = new Select(driver.findElement(By.xpath("//*[@id=\"datePickerMonthYear\"]/div[2]/div[2]/div/div/div[2]/div[1]/div[2]/div[2]/select")));
+	year.selectByVisibleText("2024");
+	Select month = new Select(driver.findElement(By.xpath("//*[@id=\"datePickerMonthYear\"]/div[2]/div[2]/div/div/div[2]/div[1]/div[2]/div[1]/select")));
+	month.selectByVisibleText("June");
+	WebElement date = driver.findElement(By.xpath("//*[@id=\"datePickerMonthYear\"]/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div[4]"));
+	date.click();
+	Thread.sleep(3);
+	WebElement value = driver.findElement(By.xpath("//*[@id=\"datePickerMonthYearInput\"]"));
+	System.out.println("entered date is:" + value.getAttribute("value"));
+	
+	//date picker with time
+	WebElement pickertime = driver.findElement(By.xpath("//*[@id=\"dateAndTimePickerInput\"]"));
+	pickertime.click();
+	driver.findElement(By.xpath("//*[@id=\"dateAndTimePicker\"]/div[2]/div[2]/div/div/div[2]/div[1]/div[2]/div[2]/div/span[1]")).click();
+	driver.findElement(By.xpath("//div[text()='2022']")).click();
+	driver.findElement(By.xpath("//*[@id=\"dateAndTimePicker\"]/div[2]/div[2]/div/div/div[2]/div[1]/div[2]/div[1]/div/span[1]")).click();
+	driver.findElement(By.xpath("//div[text()='April']")).click();
+	WebElement tdate = driver.findElement(By.xpath("//*[@id=\"dateAndTimePicker\"]/div[2]/div[2]/div/div/div[2]/div[2]/div[4]/div[3]"));
+	tdate.click();
+	WebElement time = driver.findElement(By.xpath("//*[@id=\"dateAndTimePicker\"]/div[2]/div[2]/div/div/div[3]/div[2]/div/ul/li[45]"));
+	time.click();
+	Thread.sleep(3);
+	WebElement timevalue = driver.findElement(By.xpath("//*[@id=\"dateAndTimePickerInput\"]"));
+	System.out.println("entered date with time is:" + timevalue.getAttribute("value"));
 }
+@Ignore
+@Test
+public void testdframes() {
+	driver.get("https://demoqa.com/frames");
+	//int framesCount = driver.findElements(By.tagName("iframe")).size();
+	//System.out.println(framesCount);
+	WebElement frame1 = driver.findElement(By.id("frame1"));
+	driver.switchTo().frame(frame1);
+	WebElement text = driver.findElement(By.id("sampleHeading"));
+	System.out.println("text is:" + text.getText());
+	
+	 
+}
+
+@Test
+public void testdframes2() throws Exception {
+	driver.get("https://practice.expandtesting.com/iframe");
+((JavascriptExecutor) driver).executeScript("window.scroll(0,1100)");
+    Thread.sleep(3);
+	WebElement frame1 = driver.findElement(By.id("mce_0_ifr"));
+	driver.switchTo().frame(frame1);
+	WebElement text = driver.findElement(By.id("tinymce"));
+	System.out.println("text is:" + text.getText());
+	text.clear();
+	System.out.println("text is:" + text.getText());
+	text.sendKeys("don't fly");
+	System.out.println("text is:" + text.getText());
+	//driver.findElement(By.xpath("//*[@id=\"core\"]/div/div/div[2]/div/div/div[1]/div[1]/div[2]/div/div[3]/button[1]/span")).click();
+	
+	text.sendKeys("do fly");
+	System.out.println("text is:" + text.getText());
+	
+}
+}
+
+

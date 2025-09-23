@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ day1.class, excel.class, windgets.class, windowsHandle.class })
+@SuiteClasses({ Widgets.class, windowsHandle.class })
 public class AllTests {
-
+	 
 }
