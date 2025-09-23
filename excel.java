@@ -50,8 +50,7 @@ public class excel {
 			WebElement name = driver.findElement(By.xpath("//*[@id=\"firstName\"]"));
 			name.sendKeys(cell.getStringCellValue());
 			System.out.println("xcel : " + cell.getStringCellValue());
-		
-		
+
 	}
 	// hello i'm trying to push subbrnahc
 
